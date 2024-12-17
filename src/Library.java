@@ -48,7 +48,9 @@ public class Library {
         System.out.println("Books in Library:");
         for (Book book : books) {
             book.displayInfo();
+            System.out.println(" ");
         }
+        System.out.println(" ");
         System.out.println("Library Users:");
         for (LibraryUser user : users) {
             user.displayUserInfo();

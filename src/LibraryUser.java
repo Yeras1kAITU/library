@@ -26,5 +26,6 @@ public class LibraryUser {
     public void displayUserInfo() {
         System.out.println("User Name: " + name);
         System.out.println("User ID: " + userId);
+        System.out.println(" ");
     }
 }
