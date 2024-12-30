@@ -98,13 +98,13 @@ class Library {
 
     public void displayLibraryInfo() {
         System.out.println("Library Name: " + name);
-        System.out.println("\nLibrary Items:");
+        System.out.println("\n________________Library Items________________");
         for (LibraryItem item : items) {
             item.displayInfo();
             System.out.println();
         }
 
-        System.out.println("\nLibrary Users:");
+        System.out.println("\n________________Library Users________________");
         for (LibraryUser user : users) {
             user.displayUserInfo();
         }

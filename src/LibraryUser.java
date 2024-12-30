@@ -32,7 +32,7 @@ class LibraryUser {
     }
 
     public void displayBorrowedBooks() {
-        System.out.println("Borrowed Books:");
+        System.out.println("________________Borrowed Books________________");
         if (borrowedBooks.isEmpty()) {
             System.out.println("No books borrowed.");
         } else {
@@ -41,11 +41,11 @@ class LibraryUser {
                 System.out.println();
             }
         }
+        System.out.println("______________________________________________");
     }
 
     public void displayUserInfo() {
-        System.out.println("User Name: " + name);
-        System.out.println("User ID: " + userId);
+        System.out.println(this.toString());
         displayBorrowedBooks();
     }
 
