@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class LibraryUser {
     private String name;
@@ -32,7 +33,7 @@ class LibraryUser {
     }
 
     public void displayBorrowedBooks() {
-        System.out.println("________________Borrowed Books________________");
+        System.out.println("_________________Borrowed Books_________________");
         if (borrowedBooks.isEmpty()) {
             System.out.println("No books borrowed.");
         } else {
@@ -41,7 +42,7 @@ class LibraryUser {
                 System.out.println();
             }
         }
-        System.out.println("______________________________________________");
+        System.out.println("________________________________________________");
     }
 
     public void displayUserInfo() {
@@ -65,5 +66,14 @@ class LibraryUser {
     @Override
     public int hashCode() {
         return userId.hashCode();
+    }
+
+    public static LibraryUser createUserWithInput() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter user name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter user ID: ");
+        String userId = scanner.nextLine();
+        return new LibraryUser(name, userId);
     }
 }

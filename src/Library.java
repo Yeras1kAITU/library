@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 abstract class LibraryItem {
@@ -97,16 +98,56 @@ class Library {
     }
 
     public void displayLibraryInfo() {
-        System.out.println("Library Name: " + name);
-        System.out.println("\n________________Library Items________________");
+        System.out.println("_________________" + name + "_______________");
+        System.out.println("\n_________________Library Items_________________");
         for (LibraryItem item : items) {
             item.displayInfo();
             System.out.println();
         }
 
-        System.out.println("\n________________Library Users________________");
+        System.out.println("\n_________________Library Users_________________");
         for (LibraryUser user : users) {
             user.displayUserInfo();
         }
+    }
+
+    public static Library createLibraryWithUserInput() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter library name: ");
+        String libraryName = scanner.nextLine();
+        Library library = new Library(libraryName);
+
+        System.out.print("Enter number of books to add: ");
+        int numBooks = scanner.nextInt();
+        scanner.nextLine(); // Consume the leftover newline
+
+        for (int i = 0; i < numBooks; i++) {
+            System.out.println("Enter details for book " + (i + 1) + ":");
+            System.out.print("Title: ");
+            String title = scanner.nextLine();
+            System.out.print("Author: ");
+            String author = scanner.nextLine();
+            System.out.print("ISBN: ");
+            String isbn = scanner.nextLine();
+
+            library.addItem(new Book(title, author, isbn));
+        }
+
+        System.out.print("Enter number of users to add: ");
+        int numUsers = scanner.nextInt();
+        scanner.nextLine();
+
+        for (int i = 0; i < numUsers; i++) {
+            System.out.println("Enter details for user " + (i + 1) + ":");
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+            System.out.print("User ID: ");
+            String userId = scanner.nextLine();
+
+            library.addUser(new LibraryUser(name, userId));
+        }
+
+        return library;
     }
 }
