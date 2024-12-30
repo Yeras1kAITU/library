@@ -94,11 +94,10 @@ class Library {
 
     public void displayLibraryInfo() {
         System.out.println("_________________" + name + "_______________");
-        System.out.println("\n_________________Library Items_________________");
-        for (LibraryItem item : items) {
-            item.displayInfo();
-            System.out.println();
-        }
+        System.out.println("\n_______________Library Items(sorted)_______________");
+        List<LibraryItem> sortedItems = this.sortItemsByTitle();
+
+        sortedItems.forEach(System.out::println);
 
         System.out.println("\n_________________Library Users_________________");
         for (LibraryUser user : users) {

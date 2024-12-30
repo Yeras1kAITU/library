@@ -22,12 +22,8 @@ public class OldMain {
         library.displayLibraryInfo();
 
         System.out.println("\nSearching for 'Java':");
-        List<LibraryItem> searchResults = library.searchItems("Java");
+        List<LibraryItem> searchResults = library.searchItems("Programming");
         searchResults.forEach(System.out::println);
-
-        System.out.println("\nSorting items by title:");
-        List<LibraryItem> sortedItems = library.sortItemsByTitle();
-        sortedItems.forEach(System.out::println);
 
         System.out.println("\nDisplaying borrowed books for User 1:");
         user1.displayBorrowedBooks();
