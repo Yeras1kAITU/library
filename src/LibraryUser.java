@@ -1,10 +1,14 @@
-public class LibraryUser {
+import java.util.ArrayList;
+
+class LibraryUser {
     private String name;
     private String userId;
+    private ArrayList<Book> borrowedBooks;
 
     public LibraryUser(String name, String userId) {
         this.name = name;
         this.userId = userId;
+        this.borrowedBooks = new ArrayList<>();
     }
 
     public String getName() {
@@ -23,9 +27,43 @@ public class LibraryUser {
         this.userId = userId;
     }
 
+    public void borrowBook(Book book) {
+        borrowedBooks.add(book);
+    }
+
+    public void displayBorrowedBooks() {
+        System.out.println("Borrowed Books:");
+        if (borrowedBooks.isEmpty()) {
+            System.out.println("No books borrowed.");
+        } else {
+            for (Book book : borrowedBooks) {
+                book.displayInfo();
+                System.out.println();
+            }
+        }
+    }
+
     public void displayUserInfo() {
         System.out.println("User Name: " + name);
         System.out.println("User ID: " + userId);
-        System.out.println(" ");
+        displayBorrowedBooks();
+    }
+
+    @Override
+    public String toString() {
+        return "User Name: " + name + ", User ID: " + userId;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        LibraryUser user = (LibraryUser) obj;
+        return userId.equals(user.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return userId.hashCode();
     }
 }
