@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.List;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -14,9 +14,13 @@ public class Main {
 
         if (response.equalsIgnoreCase("yes")) {
             LibraryUser newUser = LibraryUser.createUserWithInput();
-            library.addUser(newUser);
-            System.out.println("User added successfully. Updated library info:");
-            library.displayLibraryInfo();
+            boolean added = library.addUser(newUser);
+            if (added) {
+                System.out.println("User added successfully. Updated library info:");
+                library.displayLibraryInfo();
+            } else {
+                System.out.println("User could not be added (duplicate ID).");
+            }
         }
     }
 }

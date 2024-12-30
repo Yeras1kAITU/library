@@ -1,6 +1,7 @@
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -53,12 +54,12 @@ abstract class LibraryItem {
 class Library {
     private String name;
     private ArrayList<LibraryItem> items;
-    private ArrayList<LibraryUser> users;
+    private HashSet<LibraryUser> users;
 
     public Library(String name) {
         this.name = name;
         this.items = new ArrayList<>();
-        this.users = new ArrayList<>();
+        this.users = new HashSet<>();
     }
 
     public String getName() {
@@ -73,7 +74,7 @@ class Library {
         return items;
     }
 
-    public ArrayList<LibraryUser> getUsers() {
+    public HashSet<LibraryUser> getUsers() {
         return users;
     }
 
@@ -81,20 +82,14 @@ class Library {
         items.add(item);
     }
 
-    public void addUser(LibraryUser user) {
-        users.add(user);
-    }
-
-    public List<LibraryItem> searchItems(String keyword) {
-        return items.stream()
-                .filter(item -> item.getTitle().toLowerCase().contains(keyword.toLowerCase()))
-                .collect(Collectors.toList());
-    }
-
-    public List<LibraryItem> sortItemsByTitle() {
-        return items.stream()
-                .sorted(Comparator.comparing(LibraryItem::getTitle))
-                .collect(Collectors.toList());
+    public boolean addUser(LibraryUser user) {
+        if (users.contains(user)) {
+            System.out.println("User with ID " + user.getUserId() + " already exists.");
+            return false;
+        } else {
+            users.add(user);
+            return true;
+        }
     }
 
     public void displayLibraryInfo() {
@@ -111,6 +106,18 @@ class Library {
         }
     }
 
+    public List<LibraryItem> searchItems(String keyword) {
+        return items.stream()
+                .filter(item -> item.getTitle().toLowerCase().contains(keyword.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    public List<LibraryItem> sortItemsByTitle() {
+        return items.stream()
+                .sorted(Comparator.comparing(LibraryItem::getTitle))
+                .collect(Collectors.toList());
+    }
+
     public static Library createLibraryWithUserInput() {
         Scanner scanner = new Scanner(System.in);
 
@@ -120,7 +127,7 @@ class Library {
 
         System.out.print("Enter number of books to add: ");
         int numBooks = scanner.nextInt();
-        scanner.nextLine(); // Consume the leftover newline
+        scanner.nextLine();
 
         for (int i = 0; i < numBooks; i++) {
             System.out.println("Enter details for book " + (i + 1) + ":");
