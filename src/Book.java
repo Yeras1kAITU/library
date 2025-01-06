@@ -1,9 +1,11 @@
 class Book extends LibraryItem {
     private String author;
+    private String isbn;
 
     public Book(String title, String author, String isbn) {
-        super(title, isbn);
+        super(title, "Book-" + isbn);
         this.author = author;
+        this.isbn = isbn;
     }
 
     public String getAuthor() {
@@ -14,15 +16,16 @@ class Book extends LibraryItem {
         this.author = author;
     }
 
-    @Override
-    public void displayInfo() {
-        System.out.println("Book Title: " + getTitle());
-        System.out.println("Author: " + author);
-        System.out.println("ISBN: " + getId());
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     @Override
-    public String toString() {
-        return super.toString() + ", Author: " + author;
+    public void displayInfo() {
+        System.out.println("Book Title: " + getTitle() + ", Author: " + author + ", ISBN: " + isbn);
     }
 }

@@ -16,8 +16,8 @@ public class OldMain {
         library.addUser(user1);
         library.addUser(user2);
 
-        user1.borrowBook(book1);
-        user1.borrowBook(book2);
+        user1.borrowItem(book1);
+        user1.borrowItem(book2);
 
         library.displayLibraryInfo();
 
@@ -26,6 +26,6 @@ public class OldMain {
         searchResults.forEach(System.out::println);
 
         System.out.println("\nDisplaying borrowed books for User 1:");
-        user1.displayBorrowedBooks();
+        user1.displayBorrowedItems();
     }
 }

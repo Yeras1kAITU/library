@@ -5,7 +5,11 @@ import java.util.Comparator;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-abstract class LibraryItem {
+interface Displayable {
+    void displayInfo();
+}
+
+abstract class LibraryItem implements Displayable {
     private String title;
     private String id;
 
@@ -29,8 +33,6 @@ abstract class LibraryItem {
     public void setId(String id) {
         this.id = id;
     }
-
-    public abstract void displayInfo();
 
     @Override
     public String toString() {
@@ -62,47 +64,17 @@ class Library {
         this.users = new HashSet<>();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ArrayList<LibraryItem> getItems() {
-        return items;
-    }
-
-    public HashSet<LibraryUser> getUsers() {
-        return users;
-    }
-
     public void addItem(LibraryItem item) {
         items.add(item);
     }
 
-    public boolean addUser(LibraryUser user) {
-        if (users.contains(user)) {
-            System.out.println("User with ID " + user.getUserId() + " already exists.");
-            return false;
-        } else {
-            users.add(user);
-            return true;
-        }
+    // Overloaded addItem method (Static Polymorphism)
+    public void addItem(String title, String author, String isbn) {
+        items.add(new Book(title, author, isbn));
     }
 
-    public void displayLibraryInfo() {
-        System.out.println("_________________" + name + "_______________");
-        System.out.println("\n_______________Library Items(sorted)_______________");
-        List<LibraryItem> sortedItems = this.sortItemsByTitle();
-
-        sortedItems.forEach(System.out::println);
-
-        System.out.println("\n_________________Library Users_________________");
-        for (LibraryUser user : users) {
-            user.displayUserInfo();
-        }
+    public boolean addUser(LibraryUser user) {
+        return users.add(user);
     }
 
     public List<LibraryItem> searchItems(String keyword) {
@@ -156,4 +128,17 @@ class Library {
 
         return library;
     }
+
+    public void displayLibraryInfo() {
+        System.out.println("Library Name: " + name);
+        System.out.println("Library Items:");
+        for (LibraryItem item : items) {
+            item.displayInfo();
+        }
+        System.out.println("Library Users:");
+        for (LibraryUser user : users) {
+            user.displayUserInfo();
+        }
+    }
 }
+
