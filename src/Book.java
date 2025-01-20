@@ -2,8 +2,8 @@ class Book extends LibraryItem {
     private String author;
     private String isbn;
 
-    public Book(String title, String author, String isbn) {
-        super(title, "Book-" + isbn);
+    public Book(String title, String author, String isbn, String genre) {
+        super(title, "Book-" + isbn, genre);
         this.author = author;
         this.isbn = isbn;
     }
@@ -26,6 +26,6 @@ class Book extends LibraryItem {
 
     @Override
     public void displayInfo() {
-        System.out.println("Book Title: " + getTitle() + ", Author: " + author + ", ISBN: " + isbn);
+        System.out.println("Book Title: " + getTitle() + ", Author: " + author + ", ISBN: " + isbn + ", Genre: " + getGenre());
     }
 }
