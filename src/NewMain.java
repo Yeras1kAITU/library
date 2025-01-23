@@ -1,9 +1,4 @@
-import java.util.List;
 import java.util.Scanner;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class NewMain {
     public static void main(String[] args) {
@@ -22,7 +17,8 @@ public class NewMain {
             System.out.println("7. Delete a User by ID");
             System.out.println("8. Delete a Book by ISBN");
             System.out.println("9. Show User borrowed books");
-            System.out.println("10. Exit");
+            System.out.println("10. Assign Book to User");
+            System.out.println("11. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -80,7 +76,8 @@ public class NewMain {
                 case 7:
                     System.out.print("\nEnter User ID to delete: ");
                     String deleteUserId = scanner.nextLine();
-                    library.deleteUserById(deleteUserId);
+                    LibraryUser user1 = new LibraryUser(deleteUserId);
+                    user1.deleteUserById(deleteUserId);
                     break;
 
                 case 8:
@@ -92,11 +89,20 @@ public class NewMain {
                 case 9:
                     System.out.print("\nEnter User ID to see borrowed books: ");
                     String getUserBorrowedBooks = scanner.nextLine();
-                    LibraryUser user1 = new LibraryUser(getUserBorrowedBooks);
-                    user1.getUserBorrowedBooks(getUserBorrowedBooks);
+                    LibraryUser user2 = new LibraryUser(getUserBorrowedBooks);
+                    user2.getUserBorrowedBooks(getUserBorrowedBooks);
                     break;
 
                 case 10:
+                    System.out.print("Enter User ID: ");
+                    String borrowerId = scanner.nextLine();
+                    LibraryUser user3 = new LibraryUser(borrowerId);
+                    System.out.print("Enter ISBN of Book: ");
+                    String bookIsbn = scanner.nextLine();
+                    user3.assignBorrowedBook(borrowerId, bookIsbn);
+                    break;
+
+                case 11:
                     System.out.println("Exiting... Goodbye!");
                     scanner.close();
                     System.exit(0);

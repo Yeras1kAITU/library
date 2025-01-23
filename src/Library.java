@@ -91,24 +91,6 @@ class Library {
         return users.add(user);
     }
 
-    public void deleteUserById(String userId) {
-        String sql = "DELETE FROM users WHERE user_id = ?";
-
-        try (Connection conn = DB_Connection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, userId);
-            int rowsAffected = stmt.executeUpdate();
-
-            if (rowsAffected > 0) {
-                System.out.println("User with ID " + userId + " deleted successfully.");
-            } else {
-                System.out.println("No user found with ID " + userId + ".");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void deleteBookByIsbn(String isbn) {
         String sql = "DELETE FROM books WHERE isbn = ?";
 
@@ -278,7 +260,7 @@ class LibraryDatabase {
     }
 
     public void getAllBooks() {
-        String sql = "SELECT * FROM books";
+        String sql = "SELECT * FROM books ORDER BY title";
 
         try (Connection conn = DB_Connection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);

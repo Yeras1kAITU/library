@@ -76,6 +76,43 @@ class LibraryUser {
         }
     }
 
+    public void deleteUserById(String userId) {
+        String sql = "DELETE FROM users WHERE user_id = ?";
+
+        try (Connection conn = DB_Connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, userId);
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("User with ID " + userId + " deleted successfully.");
+            } else {
+                System.out.println("No user found with ID " + userId + ".");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void assignBorrowedBook(String userId, String isbn) {
+        String sql = "INSERT INTO borrowed_books (user_id, book_id) SELECT ?, id FROM books WHERE isbn = ?";
+
+        try (Connection conn = DB_Connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, userId);
+            stmt.setString(2, isbn);
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Book with ISBN " + isbn + " assigned to user " + userId + " successfully.");
+            } else {
+                System.out.println("Book or User not found.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 
