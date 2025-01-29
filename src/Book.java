@@ -3,7 +3,7 @@ class Book extends LibraryItem {
     private String isbn;
 
     public Book(String title, String author, String isbn, String genre) {
-        super(title, "Book-" + isbn, genre);
+        super(title, "Book-" + isbn, genre); // Call the constructor of LibraryItem
         this.author = author;
         this.isbn = isbn;
     }

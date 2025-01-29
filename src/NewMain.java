@@ -2,9 +2,10 @@ import java.util.Scanner;
 
 public class NewMain {
     public static void main(String[] args) {
+        ItemRepository itemRepository = new ItemRepositoryImpl();
+        UserRepository userRepository = new UserRepositoryImpl();
+        Library library = new Library("My Library", itemRepository, userRepository);
         Scanner scanner = new Scanner(System.in);
-        Library library = new Library("My Library");
-        LibraryDatabase libraryDatabase = new LibraryDatabase();
 
         while (true) {
             System.out.println("\n--- Library Management System ---");
@@ -35,8 +36,7 @@ public class NewMain {
                     System.out.print("Genre: ");
                     String genre = scanner.nextLine();
 
-                    library.addItem(title, author, isbn, genre);
-                    libraryDatabase.addBook(title, author, isbn, genre);
+                    library.addBook(new Book(title, author, isbn, genre));
                     break;
 
                 case 2:
@@ -46,38 +46,35 @@ public class NewMain {
                     System.out.print("User ID: ");
                     String userId = scanner.nextLine();
 
-                    LibraryUser user = new LibraryUser(name, userId);
-                    user.addUser(userId, name);
-                    library.addUser(user);
+                    library.addUser(new LibraryUser(name, userId));
                     break;
 
                 case 3:
                     System.out.println("\nBooks in the Library:");
-                    libraryDatabase.getAllBooks();
+                    library.getAllBooks().forEach(Book::displayInfo);
                     break;
 
                 case 4:
                     System.out.println("\nUsers in the Library:");
-                    library.showAllUsers();
+                    library.getAllUsers();
                     break;
 
                 case 5:
                     System.out.print("\nEnter keyword to search books by title: ");
                     String keyword = scanner.nextLine();
-                    library.searchBooksByTitle(keyword);
+                    library.searchBooksByTitle(keyword).forEach(Book::displayInfo);
                     break;
 
                 case 6:
                     System.out.print("\nEnter genre to filter books: ");
                     String filterGenre = scanner.nextLine();
-                    library.filterBooksByGenre(filterGenre);
+                    library.filterBooksByGenre(filterGenre).forEach(Book::displayInfo);
                     break;
 
                 case 7:
                     System.out.print("\nEnter User ID to delete: ");
                     String deleteUserId = scanner.nextLine();
-                    LibraryUser user1 = new LibraryUser(deleteUserId);
-                    user1.deleteUserById(deleteUserId);
+                    library.deleteUserById(deleteUserId);
                     break;
 
                 case 8:
@@ -89,17 +86,15 @@ public class NewMain {
                 case 9:
                     System.out.print("\nEnter User ID to see borrowed books: ");
                     String getUserBorrowedBooks = scanner.nextLine();
-                    LibraryUser user2 = new LibraryUser(getUserBorrowedBooks);
-                    user2.getUserBorrowedBooks(getUserBorrowedBooks);
+                    library.getUserBorrowedBooks(getUserBorrowedBooks).forEach(Book::displayInfo);
                     break;
 
                 case 10:
                     System.out.print("Enter User ID: ");
                     String borrowerId = scanner.nextLine();
-                    LibraryUser user3 = new LibraryUser(borrowerId);
                     System.out.print("Enter ISBN of Book: ");
                     String bookIsbn = scanner.nextLine();
-                    user3.assignBorrowedBook(borrowerId, bookIsbn);
+                    library.assignBorrowedBook(borrowerId, bookIsbn);
                     break;
 
                 case 11:
