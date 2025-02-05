@@ -1,6 +1,9 @@
+package persistence;
+
+import core.Book;
 import java.util.List;
 
-interface ItemRepository {
+public interface ItemRepository {
     void addBook(Book book);
     void deleteBookByIsbn(String isbn);
     List<Book> getAllBooks();

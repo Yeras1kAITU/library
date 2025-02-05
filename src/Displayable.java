@@ -1,3 +1,0 @@
-interface Displayable {
-    void displayInfo();
-}

@@ -1,7 +1,9 @@
+package core;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class LibraryUser {
+public class LibraryUser {
     private String name;
     private String userId;
     private List<LibraryItem> borrowedItems;

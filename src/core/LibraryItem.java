@@ -1,5 +1,6 @@
-// LibraryItem.java
-abstract class LibraryItem implements Displayable {
+package core;
+
+public abstract class LibraryItem implements Displayable {
     private String title;
     private String id;
     private String genre;

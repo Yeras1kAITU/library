@@ -1,9 +1,11 @@
-class Book extends LibraryItem {
+package core;
+
+public class Book extends LibraryItem {
     private String author;
     private String isbn;
 
     public Book(String title, String author, String isbn, String genre) {
-        super(title, "Book-" + isbn, genre); // Call the constructor of LibraryItem
+        super(title, "Book-" + isbn, genre);
         this.author = author;
         this.isbn = isbn;
     }

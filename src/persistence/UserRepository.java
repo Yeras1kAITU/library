@@ -1,6 +1,10 @@
+package persistence;
+
+import core.Book;
+import core.LibraryUser;
 import java.util.List;
 
-interface UserRepository {
+public interface UserRepository {
     void addUser(LibraryUser user);
     void deleteUserById(String userId);
     List<LibraryUser> getAllUsers();

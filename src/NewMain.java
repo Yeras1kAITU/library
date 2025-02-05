@@ -1,9 +1,15 @@
+import core.Book;
+import core.Library;
+import core.LibraryUser;
+import persistence.ItemRepositoryImpl;
+import persistence.UserRepositoryImpl;
+
 import java.util.Scanner;
 
 public class NewMain {
     public static void main(String[] args) {
-        ItemRepository itemRepository = new ItemRepositoryImpl();
-        UserRepository userRepository = new UserRepositoryImpl();
+        ItemRepositoryImpl itemRepository = new ItemRepositoryImpl();
+        UserRepositoryImpl userRepository = new UserRepositoryImpl();
         Library library = new Library("My Library", itemRepository, userRepository);
         Scanner scanner = new Scanner(System.in);
 

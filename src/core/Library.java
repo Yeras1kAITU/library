@@ -1,6 +1,11 @@
+package core;
+
+import persistence.ItemRepository;
+import persistence.UserRepository;
+
 import java.util.List;
 
-class Library {
+public class Library {
     private String name;
     private ItemRepository itemRepository;
     private UserRepository userRepository;
