@@ -8,7 +8,7 @@ public class LibraryItemFactory {
         if (type.equalsIgnoreCase("Book")) {
             return new Book(title, author, isbn, genre);
         }
-        // Add more types if needed
+
         return null;
     }
 }

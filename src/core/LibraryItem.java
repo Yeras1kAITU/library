@@ -2,12 +2,14 @@ package core;
 
 public abstract class LibraryItem implements Displayable {
     private String title;
-    private String id;
+    private String isbn;
     private String genre;
+    private String author;
 
-    public LibraryItem(String title, String id, String genre) {
+    public LibraryItem(String title, String author, String isbn, String genre) {
         this.title = title;
-        this.id = id;
+        this.author = author;
+        this.isbn = isbn;
         this.genre = genre;
     }
 
@@ -19,12 +21,12 @@ public abstract class LibraryItem implements Displayable {
         this.title = title;
     }
 
-    public String getId() {
-        return id;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getGenre() {
@@ -37,7 +39,7 @@ public abstract class LibraryItem implements Displayable {
 
     @Override
     public String toString() {
-        return "Title: " + title + ", ID: " + id + ", Genre: " + genre;
+        return "Title: " + title + ", Author: " + author + ", Genre: " + genre + ", ISBN: " + isbn;
     }
 
     @Override
@@ -45,11 +47,11 @@ public abstract class LibraryItem implements Displayable {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         LibraryItem that = (LibraryItem) obj;
-        return id.equals(that.id);
+        return isbn.equals(that.isbn);
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return isbn.hashCode();
     }
 }

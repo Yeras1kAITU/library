@@ -37,7 +37,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void assignBorrowedBook(String userId, String isbn) {
-        String sql = "INSERT INTO borrowed_books (user_id, book_id) SELECT ?, id FROM books WHERE isbn = ?";
+        String sql = "INSERT INTO borrowed_books (user_id, book_id) SELECT ?, isbn FROM books WHERE isbn = ?";
         try (Connection conn = DB_Connection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, userId);
@@ -52,7 +52,7 @@ public class UserRepositoryImpl implements UserRepository {
     public List<Book> getUserBorrowedBooks(String userId) {
         List<Book> books = new ArrayList<>();
         String sql = "SELECT books.title, books.author FROM borrowed_books " +
-                "JOIN books ON borrowed_books.book_id = books.id " +
+                "JOIN books ON borrowed_books.book_id = books.isbn " +
                 "WHERE borrowed_books.user_id = ?";
         try (Connection conn = DB_Connection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -77,7 +77,7 @@ public class UserRepositoryImpl implements UserRepository {
         String sql = "SELECT users.user_id, users.name, books.title AS book_title, books.author AS book_author, books.isbn AS book_isbn, books.genre AS book_genre " +
                 "FROM users " +
                 "LEFT JOIN borrowed_books ON users.user_id = borrowed_books.user_id " +
-                "LEFT JOIN books ON borrowed_books.book_id = books.id " +
+                "LEFT JOIN books ON borrowed_books.book_id = books.isbn " +
                 "ORDER BY users.user_id";
 
         try (Connection conn = DB_Connection.getInstance().getConnection();

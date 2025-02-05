@@ -1,6 +1,8 @@
 import core.Book;
 import core.Library;
 import core.LibraryUser;
+import patterns.BookBuilder;
+import patterns.LibraryItemFactory;
 import persistence.ItemRepositoryImpl;
 import persistence.UserRepositoryImpl;
 
@@ -42,7 +44,15 @@ public class NewMain {
                     System.out.print("Genre: ");
                     String genre = scanner.nextLine();
 
-                    library.addBook(new Book(title, author, isbn, genre));
+                    // Using BookBuilder to create a Book object
+                    Book book = new BookBuilder()
+                            .setTitle(title)
+                            .setAuthor(author)
+                            .setIsbn(isbn)
+                            .setGenre(genre)
+                            .build();
+
+                    library.addBook(book);
                     break;
 
                 case 2:
@@ -100,7 +110,21 @@ public class NewMain {
                     String borrowerId = scanner.nextLine();
                     System.out.print("Enter ISBN of Book: ");
                     String bookIsbn = scanner.nextLine();
-                    library.assignBorrowedBook(borrowerId, bookIsbn);
+
+                    Book borrowedBook = (Book) LibraryItemFactory.createItem(
+                            "Book",
+                            "",
+                            "",
+                            "",
+                            "",
+                            bookIsbn
+                    );
+
+                    if (borrowedBook != null) {
+                        library.assignBorrowedBook(borrowerId, bookIsbn);
+                    } else {
+                        System.out.println("Book not found!");
+                    }
                     break;
 
                 case 11:
